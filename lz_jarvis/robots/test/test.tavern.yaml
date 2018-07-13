@@ -1,0 +1,44 @@
+test_name: Make sure user location is correct
+
+stages:
+
+    # Log in as user and save the login token for future requests
+  - name: Login as test user
+    request:
+      url: http://127.0.0.1:8000/login/
+      method: POST
+      json:
+        username: "andres"
+        password: "admin1234"
+    response:
+      status_code: 200
+      save:
+        body:
+          test_user_login_token: token
+      body:
+        $ext:
+          function: tavern.testutils.helpers:validate_jwt
+          extra_kwargs:
+            jwt_key: "token"
+            options:
+              verify_signature: false
+
+  - name: Get user location
+    request:
+      url: http://127.0.0.1:8000/task/create/
+      json:
+        "keyword": "{keyword:s}"
+        "domain": "{domain:s}"
+        "google": !int  "{google:d}"
+        "yahoo": !int  "{yahoo:d}"
+        "bing": !int   "{bing:d}"
+        "duckduck": !int  "{duckduck:d}"
+        "destination": "{destination:s}"
+      method: POST
+      headers:
+        Authorization: "JWT {test_user_login_token}"
+    response:
+      status_code: 200
+
+
+

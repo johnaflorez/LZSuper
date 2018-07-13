@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "f5badc82-8339-4d41-85c0-a842972c6956",
+		"name": "LZ_Jarvis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Logout",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token 2d676cf192ec3086e7ad975d5064a2a152fb6279"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:8000/auth/logout/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"logout",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ca4b8741-f53f-4165-9afa-c248f45f7312",
+						"type": "text/javascript",
+						"exec": [
+							"",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "29cd17be-f318-48b6-8bc4-8a0553bf5867",
+						"type": "text/javascript",
+						"exec": [
+							"//Get request response",
+							"var Json = JSON.parse(responseBody);",
+							"var text = Json.token;",
+							"pm.environment.set(\"TOKEN\", text);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"admin123\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/auth/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Robot",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Token {{TOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "   {\n       \"keyword\": \"pizza\",\n       \"domain\": \"bancolombia.com\",\n       \"google\": true,\n       \"yahoo\": false,\n       \"bing\": false,\n       \"duckduck\": false,\n       \"destination\": \"pruebadajngo@gmail.com\",\n       \"start\": false\n   }"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/robot/create/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"robot",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Task Running",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{TOKEN}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:8000/task/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"task",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Task Done",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{TOKEN}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:8000/tasks_done/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"tasks_done",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Robots",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{TOKEN}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:8000/robots/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"robots",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send robot to execute",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{TOKEN}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:8000/robot/1/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"robot",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
